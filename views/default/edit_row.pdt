@@ -1,0 +1,25 @@
+<?php
+$this->Widget->clear();
+$this->Widget->create($this->_('Unstoppabledomains.edit_row.box_title', true));
+?>
+<div class="inner">
+    <?php $this->Form->create(); ?>
+    <div class="title_row first">
+        <h3><?php $this->_('Unstoppabledomains.edit_row.basic_title'); ?></h3>
+    </div>
+    <div class="pad">
+        <ul>
+            <li><?php $this->Form->label($this->_('Unstoppabledomains.row_meta.label', true), 'label'); $this->Form->fieldText('label', $vars->label ?? '', ['id' => 'label']); ?></li>
+            <li><?php $this->Form->label($this->_('Unstoppabledomains.row_meta.api_preference', true), 'api_preference'); $this->Form->fieldSelect('api_preference', ['reseller' => $this->_('Unstoppabledomains.row_meta.api_preference.reseller', true), 'user' => $this->_('Unstoppabledomains.row_meta.api_preference.user', true)], $vars->api_preference ?? 'reseller', ['id' => 'api_preference']); ?></li>
+            <li><?php $this->Form->label($this->_('Unstoppabledomains.row_meta.reseller_token', true), 'reseller_token'); $this->Form->fieldPassword('reseller_token', ['id' => 'reseller_token', 'value' => $vars->reseller_token ?? '', 'autocomplete' => 'off']); ?></li>
+            <li><?php $this->Form->label($this->_('Unstoppabledomains.row_meta.user_api_key', true), 'user_api_key'); $this->Form->fieldPassword('user_api_key', ['id' => 'user_api_key', 'value' => $vars->user_api_key ?? '', 'autocomplete' => 'off']); ?></li>
+            <li><?php $this->Form->label($this->_('Unstoppabledomains.row_meta.reseller_base_url', true), 'reseller_base_url'); $this->Form->fieldText('reseller_base_url', $vars->reseller_base_url ?? 'https://api.unstoppabledomains.com/partner/v3', ['id' => 'reseller_base_url']); ?></li>
+            <li><?php $this->Form->label($this->_('Unstoppabledomains.row_meta.user_base_url', true), 'user_base_url'); $this->Form->fieldText('user_base_url', $vars->user_base_url ?? 'https://api.unstoppabledomains.com', ['id' => 'user_base_url']); ?></li>
+            <li><?php $this->Form->fieldCheckbox('sandbox', 'true', ($vars->sandbox ?? 'false') == 'true', ['id' => 'sandbox']); $this->Form->label($this->_('Unstoppabledomains.row_meta.sandbox', true), 'sandbox', ['class' => 'inline']); ?></li>
+            <li><?php $this->Form->label($this->_('Unstoppabledomains.row_meta.notes', true), 'notes'); $this->Form->fieldTextarea('notes', $vars->notes ?? '', ['id' => 'notes']); ?></li>
+        </ul>
+    </div>
+    <div class="button_row"><a class="btn btn-primary float-right submit" href="#"><?php $this->_('Unstoppabledomains.edit_row.edit_btn'); ?></a></div>
+    <?php $this->Form->end(); ?>
+</div>
+<?php $this->Widget->end(); ?>

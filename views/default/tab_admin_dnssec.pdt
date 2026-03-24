@@ -1,0 +1,54 @@
+<div id="dnssec">
+    <?php if (!empty($reseller_only)): ?>
+        <div class="pad">
+            <div class="alert alert-warning">
+                <?php $this->_('Unstoppabledomains.dnssec.reseller_only'); ?>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="title_row first">
+            <h3><?php $this->_('Unstoppabledomains.dnssec.title'); ?></h3>
+        </div>
+        <div class="pad">
+            <p><strong><?php echo $this->Html->ifSet($domain); ?></strong></p>
+
+            <div class="alert alert-info">
+                <strong><?php $this->_('Unstoppabledomains.dnssec.disclaimer_title'); ?></strong><br />
+                <?php $this->_('Unstoppabledomains.dnssec.warning'); ?>
+            </div>
+
+            <?php if ($dnssec_status === true): ?>
+                <p><strong><?php $this->_('Unstoppabledomains.dnssec.status'); ?>:</strong>
+                    <?php $this->_('Unstoppabledomains.dnssec.status_enabled'); ?>
+                </p>
+
+                <?php if (!empty($dnssec_details)): ?>
+                    <h4><?php $this->_('Unstoppabledomains.dnssec.details'); ?></h4>
+                    <pre><?php echo htmlspecialchars(print_r($dnssec_details, true), ENT_QUOTES, 'UTF-8'); ?></pre>
+                <?php endif; ?>
+
+                <?php $this->Form->create(); ?>
+                    <?php $this->Form->fieldHidden('disable_dnssec', '1'); ?>
+                    <div class="button_row">
+                        <button type="submit" class="btn btn-danger float-right"><?php $this->_('Unstoppabledomains.dnssec.disable'); ?></button>
+                    </div>
+                <?php $this->Form->end(); ?>
+
+            <?php elseif ($dnssec_status === false): ?>
+                <p><strong><?php $this->_('Unstoppabledomains.dnssec.status'); ?>:</strong>
+                    <?php $this->_('Unstoppabledomains.dnssec.status_disabled'); ?>
+                </p>
+
+                <?php $this->Form->create(); ?>
+                    <?php $this->Form->fieldHidden('enable_dnssec', '1'); ?>
+                    <div class="button_row">
+                        <button type="submit" class="btn btn-primary float-right"><?php $this->_('Unstoppabledomains.dnssec.enable'); ?></button>
+                    </div>
+                <?php $this->Form->end(); ?>
+
+            <?php else: ?>
+                <p class="text-muted"><?php $this->_('Unstoppabledomains.dnssec.status_unknown'); ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>

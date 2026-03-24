@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <div class="form-group">
+                <?php echo $this->Form->label($this->_('Unstoppabledomains.row_meta.label'), 'label'); ?>
+                <?php echo $this->Form->fieldText('label', $vars->label ?? ''); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label($this->_('Unstoppabledomains.row_meta.api_preference'), 'api_preference'); ?>
+                <?php echo $this->Form->fieldSelect('api_preference', [
+                    'reseller' => $this->_('Unstoppabledomains.row_meta.api_preference.reseller'),
+                    'user' => $this->_('Unstoppabledomains.row_meta.api_preference.user')
+                ], $vars->api_preference ?? 'reseller'); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label($this->_('Unstoppabledomains.row_meta.reseller_token'), 'reseller_token'); ?>
+                <?php echo $this->Form->fieldPassword('reseller_token', ['id' => 'reseller_token', 'value' => $vars->reseller_token ?? '', 'autocomplete' => 'off']); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label($this->_('Unstoppabledomains.row_meta.user_api_key'), 'user_api_key'); ?>
+                <?php echo $this->Form->fieldPassword('user_api_key', ['id' => 'user_api_key', 'value' => $vars->user_api_key ?? '', 'autocomplete' => 'off']); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label($this->_('Unstoppabledomains.row_meta.reseller_base_url'), 'reseller_base_url'); ?>
+                <?php echo $this->Form->fieldText('reseller_base_url', $vars->reseller_base_url ?? 'https://api.unstoppabledomains.com/partner/v3'); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label($this->_('Unstoppabledomains.row_meta.user_base_url'), 'user_base_url'); ?>
+                <?php echo $this->Form->fieldText('user_base_url', $vars->user_base_url ?? 'https://api.unstoppabledomains.com'); ?>
+            </div>
+            <div class="form-group">
+                <label>
+                    <?php echo $this->Form->fieldCheckbox('sandbox', 'true', (($vars->sandbox ?? 'false') == 'true')); ?>
+                    <?php echo $this->_('Unstoppabledomains.row_meta.sandbox'); ?>
+                </label>
+            </div>
+            <div class="form-group">
+                <?php echo $this->Form->label($this->_('Unstoppabledomains.row_meta.notes'), 'notes'); ?>
+                <?php echo $this->Form->fieldTextarea('notes', $vars->notes ?? ''); ?>
+            </div>
+        </div>
+    </div>
+</div>

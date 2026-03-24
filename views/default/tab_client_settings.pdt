@@ -1,0 +1,49 @@
+<?php
+$privacy = is_array($flags['DNS_WHOIS_PROXY'] ?? null)
+    ? strtolower((string) ($flags['DNS_WHOIS_PROXY']['status'] ?? '')) === 'enabled'
+    : !empty($flags['DNS_WHOIS_PROXY']);
+$autoRenew = is_array($flags['DNS_RENEW'] ?? null)
+    ? strtolower((string) ($flags['DNS_RENEW']['status'] ?? '')) === 'enabled'
+    : !empty($flags['DNS_RENEW']);
+$transferLock = is_array($flags['DNS_TRANSFER_OUT'] ?? null)
+    ? strtolower((string) ($flags['DNS_TRANSFER_OUT']['status'] ?? '')) !== 'enabled'
+    : empty($flags['DNS_TRANSFER_OUT']);
+?>
+<div class="row">
+    <div class="col-md-12">
+        <p><strong><?php echo $this->Html->ifSet($domain); ?></strong></p>
+        <div class="alert alert-info">
+            <?php echo $this->_(($mode ?? 'reseller') === 'user'
+                ? 'Unstoppabledomains.client.settings.mode_notice.user'
+                : 'Unstoppabledomains.client.settings.mode_notice.reseller'); ?>
+        </div>
+        <?php $this->Form->create(); ?>
+            <div class="checkbox">
+                <label>
+                    <?php $this->Form->fieldCheckbox('privacy', '1', $privacy, ['id' => 'privacy']); ?>
+                    <?php $this->_('Unstoppabledomains.service_field.privacy'); ?>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <?php $this->Form->fieldCheckbox('auto_renew', '1', $autoRenew, ['id' => 'auto_renew']); ?>
+                    <?php $this->_('Unstoppabledomains.service_field.auto_renew'); ?>
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <?php $this->Form->fieldCheckbox('transfer_lock', '1', $transferLock, ['id' => 'transfer_lock']); ?>
+                    <?php $this->_('Unstoppabledomains.service_field.transfer_lock'); ?>
+                </label>
+            </div>
+            <div class="form-group">
+                <?php
+                $this->Form->label($this->_('Unstoppabledomains.client.settings.payment_method_id', true), 'payment_method_id');
+                $this->Form->fieldText('payment_method_id', '', ['id' => 'payment_method_id', 'class' => 'form-control']);
+                ?>
+            </div>
+            <?php $this->Form->fieldHidden('save_settings', '1'); ?>
+            <button type="submit" class="btn btn-primary"><?php $this->_('Unstoppabledomains.client.settings.submit'); ?></button>
+        <?php $this->Form->end(); ?>
+    </div>
+</div>

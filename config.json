@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "type": "registrar",
+  "name": "Unstoppabledomains.name",
+  "description": "Unstoppabledomains.description",
+  "authors": [
+    {
+      "name": "BiswasHost",
+      "url": "https://www.biswashost.com"
+    }
+  ],
+  "package": {
+    "name_key": "domain"
+  },
+  "service": {
+    "name_key": "domain"
+  },
+  "module": {
+    "row": "Unstoppabledomains.module_row",
+    "rows": "Unstoppabledomains.module_row_plural",
+    "row_key": "label"
+  },
+  "email_tags": {
+    "module": [],
+    "package": [],
+    "service": [
+      "domain",
+      "transfer",
+      "privacy",
+      "ns1",
+      "ns2",
+      "ns3",
+      "ns4",
+      "ns5"
+    ]
+  },
+  "features": {
+    "dns_management": 1,
+    "id_protection": 1,
+    "epp_code": 1
+  }
+}

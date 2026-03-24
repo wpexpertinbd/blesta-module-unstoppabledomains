@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-md-12">
+        <p><strong><?php echo $this->Html->ifSet($domain); ?></strong></p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><?php $this->_('Unstoppabledomains.dns.heading_id'); ?></th>
+                    <th><?php $this->_('Unstoppabledomains.dns.heading_name'); ?></th>
+                    <th><?php $this->_('Unstoppabledomains.dns.heading_type'); ?></th>
+                    <th><?php $this->_('Unstoppabledomains.dns.heading_values'); ?></th>
+                    <th><?php $this->_('Unstoppabledomains.dns.heading_ttl'); ?></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ((array) $records as $record): ?>
+                <tr>
+                    <td><?php echo $this->Html->safe($record['id'] ?? ''); ?></td>
+                    <td><?php echo $this->Html->safe(($record['subName'] ?? '') ?: '@'); ?></td>
+                    <td><?php echo $this->Html->safe($record['type'] ?? ''); ?></td>
+                    <td><?php echo $this->Html->safe(is_array($record['values'] ?? null) ? implode(', ', $record['values']) : ''); ?></td>
+                    <td><?php echo $this->Html->safe($record['ttl'] ?? ''); ?></td>
+                    <td>
+                        <?php if (!empty($record['id']) && empty($record['readonly'])): ?>
+                        <?php $this->Form->create(); ?>
+                            <?php $this->Form->fieldHidden('record_id', $record['id']); ?>
+                            <?php $this->Form->fieldHidden('delete_record', '1'); ?>
+                            <button type="submit" class="btn btn-xs btn-danger"><?php $this->_('Unstoppabledomains.client.dns.delete'); ?></button>
+                        <?php $this->Form->end(); ?>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <hr />
+        <?php $this->Form->create(); ?>
+            <div class="form-group">
+                <?php
+                $this->Form->label($this->_('Unstoppabledomains.dns.field_sub_name', true), 'subName');
+                $this->Form->fieldText('subName', '@', ['id' => 'subName', 'class' => 'form-control']);
+                ?>
+            </div>
+            <div class="form-group">
+                <?php
+                $this->Form->label($this->_('Unstoppabledomains.dns.field_type', true), 'type');
+                $this->Form->fieldSelect('type', [
+                    'A' => 'A', 'AAAA' => 'AAAA', 'CNAME' => 'CNAME',
+                    'MX' => 'MX', 'TXT' => 'TXT', 'SRV' => 'SRV', 'NS' => 'NS'
+                ], 'A', ['id' => 'type', 'class' => 'form-control']);
+                ?>
+            </div>
+            <div class="form-group">
+                <?php
+                $this->Form->label($this->_('Unstoppabledomains.dns.field_values', true), 'values');
+                $this->Form->fieldTextarea('values', '', ['id' => 'values', 'class' => 'form-control']);
+                ?>
+            </div>
+            <div class="form-group">
+                <?php
+                $this->Form->label($this->_('Unstoppabledomains.dns.field_ttl', true), 'ttl');
+                $this->Form->fieldText('ttl', '300', ['id' => 'ttl', 'class' => 'form-control']);
+                ?>
+            </div>
+            <?php $this->Form->fieldHidden('add_dns', '1'); ?>
+            <button type="submit" class="btn btn-primary"><?php $this->_('Unstoppabledomains.client.dns.submit_add'); ?></button>
+        <?php $this->Form->end(); ?>
+    </div>
+</div>
