@@ -178,7 +178,7 @@ unstoppabledomains/
 
 ## License
 
-Proprietary. All rights reserved.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ## Author
 
